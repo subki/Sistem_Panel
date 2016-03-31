@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1190" pageHeight="1684" whenNoDataType="BlankPage" columnWidth="1190" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5b292a52-ba45-4491-816e-80228226bdfc">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nomor" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SSM\\src\\print\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="product_no" class="java.lang.String"/>
+	<parameter name="kode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from fcm]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="d7eaaafd-0163-4d06-bca0-c6a8e34dea9e" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="20" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="nomor">
+					<subreportParameterExpression><![CDATA[$P{nomor}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fcmreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<break>
+				<reportElement uuid="77458814-1db6-4e2c-a905-ef89cdcac4d5" x="0" y="5" width="595" height="1"/>
+			</break>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement uuid="549e2076-a9a2-45a8-b3fc-34283d9d3685" x="0" y="0" width="595" height="20"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="nomor">
+					<subreportParameterExpression><![CDATA[$P{nomor}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "suboffer2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<break>
+				<reportElement uuid="62643587-9508-4f9e-ba27-e11e7b0842ce" x="0" y="3" width="595" height="1"/>
+			</break>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement uuid="2aa0d07d-bb35-47d3-8085-21d9991ffab6" x="0" y="0" width="595" height="20"/>
+				<subreportParameter name="nomor">
+					<subreportParameterExpression><![CDATA[$P{product_no}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "componentreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="9">
+			<break>
+				<reportElement uuid="5f161bef-9790-4b0b-ad48-1ab970a68f64" x="0" y="4" width="595" height="1"/>
+			</break>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement uuid="88669b64-5c39-418e-b761-370f1eb196ca" x="0" y="0" width="595" height="20"/>
+				<subreportParameter name="kode">
+					<subreportParameterExpression><![CDATA[$P{kode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "boxreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band/>
+		<band/>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

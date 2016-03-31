@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c219fe5e-2ca6-4230-981e-545e42789236">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\SSM\\src\\print\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nomor" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cur" class="java.lang.Integer"/>
+	<parameter name="kurs" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     	a.offer_no,
+     	a.currency,
+	a.lang,
+	a.tgl,
+	a.subjek,
+	a.refer,
+	a.header,
+	a.footer
+FROM
+     offer a
+WHERE
+	offer_no=$P{nomor}]]>
+	</queryString>
+	<field name="OFFER_NO" class="java.lang.String"/>
+	<field name="CURRENCY" class="java.lang.String"/>
+	<field name="LANG" class="java.lang.String"/>
+	<field name="TGL" class="java.sql.Date"/>
+	<field name="SUBJEK" class="java.lang.String"/>
+	<field name="REFER" class="java.lang.String"/>
+	<field name="HEADER" class="java.sql.Clob"/>
+	<field name="FOOTER" class="java.sql.Clob"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="99" splitType="Stretch">
+			<image>
+				<reportElement uuid="5903eeeb-acc0-4cec-829b-d73928b9928a" x="0" y="0" width="555" height="96"/>
+				<imageExpression><![CDATA["C:\\SSM\\image\\banner.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5a9afadf-b6ec-4f46-8078-a2304cc13349" x="0" y="0" width="355" height="39"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{HEADER}.getSubString( 1l, ( new Long( $F{HEADER}.length() ) ).intValue() )]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="55a877a4-5d8c-466a-9937-143f4aff08fe" x="455" y="0" width="100" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TGL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3e0d4b93-6dd7-4966-8574-16b0cc46cffa" x="355" y="0" width="100" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Tangerang, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e0d4b93-6dd7-4966-8574-16b0cc46cffa" x="355" y="13" width="100" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Our Ref. QT :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e0d4b93-6dd7-4966-8574-16b0cc46cffa" x="355" y="26" width="100" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Your Ref. :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9e9246d5-21f2-460a-ae30-c5136f915609" x="0" y="0" width="355" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Price Schedule :]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="bb191617-8de6-4632-8c05-59b7db86a294" x="0" y="0" width="555" height="20"/>
+				<subreportParameter name="nomor">
+					<subreportParameterExpression><![CDATA[$P{nomor}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cur">
+					<subreportParameterExpression><![CDATA[$P{cur}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreportoffer2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="39">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5a9afadf-b6ec-4f46-8078-a2304cc13349" x="0" y="0" width="355" height="39"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{FOOTER}.getSubString( 1l, ( new Long( $F{FOOTER}.length() ) ).intValue() )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6c770c2f-1c9b-4ab0-b766-47fbe2c3ad1b" x="0" y="0" width="555" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1 "+$P{kurs}+" = Rp."+$P{cur}
+]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
